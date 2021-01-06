@@ -4,10 +4,20 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import static java.lang.System.out;
 import java.io.*;
-
+import java.util.Scanner;
+import java.io.ObjectInputStream;
 public class runner {
-
-	public static void main(String[] args) {
+	static Scanner input = new Scanner(System.in);
+	public static void main(String[] args) {		
+		String option ="6";
+		do {
+			System.out.println("Please enter what you would like to do \n"
+					+ "1.Enter Image Directory\n"
+					+ "2.Select a certain image\n"
+					+ "3.add a custom filter\n"
+					+ "4.Exit(but you wouldn't do that, right?)\n");
+			option = input.nextLine();
+		} while (!option.equalsIgnoreCase("5"));	
 		runner r =  new runner();
 		r.name();
 	}
