@@ -1,6 +1,8 @@
 package ie.gmit.sw;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -15,7 +17,6 @@ public class Runner {
    *
    * @param args yar
    */
-  
   public static void main(String[] args) {
     String option = "6";
     BlockingQueue<FileWithData> listOfFiles = null;
@@ -40,17 +41,21 @@ public class Runner {
       } else if (option.equalsIgnoreCase("2")) {
         System.out.println("Please type the png name");
 
-        ThreadForImageProcessing imageProcess1 =
-            new ThreadForImageProcessing(listOfFiles, folderName, new ProcessImage());
-        ThreadForImageProcessing imageProcess2 =
-            new ThreadForImageProcessing(listOfFiles, folderName, new Filler());
-        new Thread(imageProcess1).start();
-        new Thread(imageProcess2).start();
-//wait for threads to finsih
+        List<Thread> threads = startAllThreads(listOfFiles, folderName);
+
+        waitForAllThreads(threads);
+
       } else if (option.equalsIgnoreCase("3")) {
         String customFilter = input.nextLine();
         System.out.println(customFilter);
       } else if (option.equalsIgnoreCase("4")) {
+        System.out.println("Filtering all images");
+
+        List<Thread> threads = startAllThreads(listOfFiles, folderName);
+
+        waitForAllThreads(threads);
+
+      } else if (option.equalsIgnoreCase("5")) {
         System.out.println("Have a nice day :{");
       } else {
         System.out.println(
@@ -58,5 +63,31 @@ public class Runner {
       }
 
     } while (!option.equalsIgnoreCase("4"));
+  }
+
+  private static void waitForAllThreads(List<Thread> threads) {
+    for (Thread thread : threads) {
+      try {
+        thread.join();
+
+      } catch (InterruptedException e) { // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
+  }
+
+  private static List<Thread> startAllThreads(
+      BlockingQueue<FileWithData> listOfFiles, String folderName) {
+    ThreadForImageProcessing imageProcess1 =
+        new ThreadForImageProcessing(listOfFiles, folderName, new ProcessImage());
+    ThreadForImageProcessing imageProcess2 =
+        new ThreadForImageProcessing(listOfFiles, folderName, new Filler());
+    List<Thread> threads = new ArrayList<>();
+    threads.add(new Thread(imageProcess1));
+    threads.add(new Thread(imageProcess2));
+    for (Thread thread : threads) {
+      thread.start();
+    }
+    return threads;
   }
 }
