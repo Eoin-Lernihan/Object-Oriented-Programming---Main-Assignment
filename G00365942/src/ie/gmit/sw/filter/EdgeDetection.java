@@ -1,5 +1,11 @@
 package ie.gmit.sw.filter;
 
+/**
+ * Class for Edge Detection.
+ * 
+ * @author eoinb
+ *
+ */
 
 public class EdgeDetection extends SuperApply {
   int[][] filter = {{1, 0, -1}, {0, 0, 0}, {-1, 0, 1}};

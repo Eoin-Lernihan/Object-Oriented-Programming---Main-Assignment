@@ -1,6 +1,11 @@
 package ie.gmit.sw.filter;
 
 import java.awt.image.BufferedImage;
+/**
+ * Abstact class for matrix filtering.
+ * @author eoinb
+ *
+ */
 
 public abstract class SuperApply extends AbtractImageProccessor {
 

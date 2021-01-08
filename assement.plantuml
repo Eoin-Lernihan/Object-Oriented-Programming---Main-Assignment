@@ -1,0 +1,41 @@
+@startuml
+abstract        SuperApply
+abstract        AbtractImageProccessor
+class           DiretoryReader
+class           Bit32Convertor
+class           EdgeDetection
+class           ThreadForImageProcessing
+class           Runner
+class           FileWithData
+class           Idenitfy
+class           SobelVertical
+interface       FilteringInterface
+FilteringInterface <|.. AbtractImageProccessor  
+AbtractImageProccessor ^--  SuperApply
+SuperApply ^-- EdgeDetection
+SuperApply ^-- Idenitfy
+SuperApply ^-- SobelVertical
+AbtractImageProccessor ^--  Bit32Convertor
+ThreadForImageProcessing o-- FilteringInterface
+Runner *-- DiretoryReader
+Runner "1" *-- "many" ThreadForImageProcessing
+
+FilteringInterface : {abstract}+processImage()
+DiretoryReader : +BlockingQueue<FileWithData> listfilesForFolder()
+AbtractImageProccessor : +processImage()
+AbtractImageProccessor : {abstract}#apply()
+Bit32Convertor : #apply()
+SuperApply : #apply() 
+SuperApply : {abstract}#filterValue 
+SuperApply : {abstract}#filterWitdth 
+SuperApply : {abstract}#filterLenght
+EdgeDetection : #filterValue 
+EdgeDetection : #filterWitdth 
+EdgeDetection : #filterLenght
+Idenitfy : #filterValue 
+Idenitfy : #filterWitdth 
+Idenitfy : #filterLenght
+SobelVertical : #filterValue 
+SobelVertical : #filterWitdth 
+SobelVertical : #filterLenght
+@enduml

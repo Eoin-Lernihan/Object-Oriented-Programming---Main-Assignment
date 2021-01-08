@@ -6,7 +6,12 @@ import java.util.concurrent.BlockingQueue;
 public class DiretoryReader {
 
   private BlockingQueue<FileWithData> qfileWithDatas;
-
+/**
+ * Constructor will populate.
+ * 
+ * @param qfileWithDatas
+ */
+  
   public DiretoryReader(BlockingQueue<FileWithData> qfileWithDatas) {
     this.qfileWithDatas = qfileWithDatas;
   }

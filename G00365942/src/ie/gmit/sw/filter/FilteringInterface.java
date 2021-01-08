@@ -1,4 +1,9 @@
 package ie.gmit.sw.filter;
+/**
+ * Interface for all filters.
+ * @author eoinb
+ *
+ */
 
 public interface FilteringInterface {
 

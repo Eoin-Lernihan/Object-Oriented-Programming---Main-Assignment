@@ -4,6 +4,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+/**
+ * Abastack class to processes iamgae.
+ *
+ * @author eoinb
+ */
 
 public abstract class AbtractImageProccessor implements FilteringInterface {
 
@@ -48,6 +53,5 @@ public abstract class AbtractImageProccessor implements FilteringInterface {
    * @param y The y location of the pixel.
    * @return the transformed pixel
    */
-  
   protected abstract int apply(BufferedImage image, int pixel, int x, int y);
 }

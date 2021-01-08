@@ -1,6 +1,12 @@
 package ie.gmit.sw.filter;
 
 import java.awt.image.BufferedImage;
+/**
+ * Class to convert image file to 32bit.
+ * 
+ * @author eoinb
+ *
+ */
 
 public class Bit32Convertor extends AbtractImageProccessor {
 

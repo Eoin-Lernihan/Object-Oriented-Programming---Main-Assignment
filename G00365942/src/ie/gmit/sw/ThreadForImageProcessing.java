@@ -9,10 +9,10 @@ public class ThreadForImageProcessing implements Runnable {
   private String folderName;
   private FilteringInterface filter;
 
-  ThreadForImageProcessing(BlockingQueue<FileWithData> q, String folderName, FilteringInterface r) {
+  ThreadForImageProcessing(BlockingQueue<FileWithData> q, String folderName, FilteringInterface filter) {
     queue = q;
     this.folderName = folderName;
-    this.filter = r;
+    this.filter = filter;
   }
 
   /** It's runs the tread. */
