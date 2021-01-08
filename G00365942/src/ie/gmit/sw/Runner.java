@@ -5,6 +5,9 @@ import java.util.Scanner;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+import ie.gmit.sw.filter.Filler;
+import ie.gmit.sw.filter.ProcessImage;
+
 public class Runner {
   static Scanner input = new Scanner(System.in);
   /**
@@ -43,7 +46,7 @@ public class Runner {
             new ThreadForImageProcessing(listOfFiles, folderName, new Filler());
         new Thread(imageProcess1).start();
         new Thread(imageProcess2).start();
-
+//wait for threads to finsih
       } else if (option.equalsIgnoreCase("3")) {
         String customFilter = input.nextLine();
         System.out.println(customFilter);
