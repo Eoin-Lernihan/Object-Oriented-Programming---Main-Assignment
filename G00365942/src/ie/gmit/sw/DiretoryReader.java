@@ -29,7 +29,6 @@ public class DiretoryReader {
         try {
           qfileWithDatas.put(fileWithData);
         } catch (InterruptedException e) {
-          // TODO Auto-generated catch block
           e.printStackTrace();
         }
       }

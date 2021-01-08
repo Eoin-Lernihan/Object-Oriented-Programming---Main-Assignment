@@ -1,5 +1,11 @@
 package ie.gmit.sw;
 
+
+import ie.gmit.sw.filter.Bit32Convertor;
+import ie.gmit.sw.filter.EdgeDetection;
+import ie.gmit.sw.filter.FilteringInterface;
+import ie.gmit.sw.filter.Idenitfy;
+import ie.gmit.sw.filter.SobelVertical;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,10 +13,6 @@ import java.util.Scanner;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-import ie.gmit.sw.filter.FilteringInterface;
-import ie.gmit.sw.filter.Idenitfy;
-import ie.gmit.sw.filter.EdgeDetection;
-import ie.gmit.sw.filter.Bit32Convertor;
 
 public class Runner {
   static Scanner input = new Scanner(System.in);
@@ -19,6 +21,7 @@ public class Runner {
    *
    * @param args yar
    */
+  
   public static void main(String[] args) {
     String option = "6";
     BlockingQueue<FileWithData> listOfFiles = null;
@@ -62,10 +65,11 @@ public class Runner {
 
       } else if (option.equalsIgnoreCase("3")) {
         System.out.println(
-            "Current Kernel Filter are"
+            "Current Kernel Filter are\n"
                 + "1.Default(32 bit convertor)\n"
                 + "2.Edgy detection\n"
-                + "3.Identity\n");
+                + "3.Identity\n"
+                + "4.Sobel Vertical\n");
 
         customFilter = Integer.valueOf(input.nextLine());
 
@@ -99,7 +103,6 @@ public class Runner {
     try {
       listOfFiles.put(fileWithData);
     } catch (InterruptedException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     return listOfFiles;
@@ -107,14 +110,15 @@ public class Runner {
   /**
    * Waits for all treads to finish before continuning.
    *
-   * @param threads
+   * @param threads list of threads that we are waiting for.
    */
+  
   private static void waitForAllThreads(List<Thread> threads) {
     for (Thread thread : threads) {
       try {
         thread.join();
 
-      } catch (InterruptedException e) { // TODO Auto-generated catch block
+      } catch (InterruptedException e) { 
         e.printStackTrace();
       }
     }
@@ -122,10 +126,11 @@ public class Runner {
   /**
    * Starts all possible treads.
    *
-   * @param listOfFiles
-   * @param folderName
-   * @return
+   * @param listOfFiles list of files to process.
+   * @param folderName Floder name of where out put goes.
+   * @return list of threads.
    */
+  
   private static List<Thread> startAllThreads(
       BlockingQueue<FileWithData> listOfFiles, String folderName, int customFilterChoice) {
     int num = 3;
@@ -141,7 +146,9 @@ public class Runner {
       if (customFilterChoice == 3) {
         customFilter = new Idenitfy();
       }
-      
+      if (customFilterChoice == 4) {
+        customFilter = new SobelVertical();
+      }
       ThreadForImageProcessing imageProcess =
           new ThreadForImageProcessing(listOfFiles, folderName, customFilter);
       threads.add(new Thread(imageProcess));

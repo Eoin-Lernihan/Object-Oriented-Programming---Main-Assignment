@@ -3,7 +3,6 @@ package ie.gmit.sw.filter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
 public abstract class AbtractImageProccessor implements FilteringInterface {
@@ -36,10 +35,19 @@ public abstract class AbtractImageProccessor implements FilteringInterface {
     try {
       ImageIO.write(image, "png", new File(outputFilePath));
     } catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
   }
 
+  /**
+   * Applys the logic of the chosen filter on a pixel for the given image.
+   *
+   * @param image The image that is given.
+   * @param pixel The current pixel that needs to tranformed.
+   * @param x The x location of the pixel.
+   * @param y The y location of the pixel.
+   * @return the transformed pixel
+   */
+  
   protected abstract int apply(BufferedImage image, int pixel, int x, int y);
 }
