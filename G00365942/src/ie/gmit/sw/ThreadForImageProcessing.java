@@ -34,7 +34,12 @@ public class ThreadForImageProcessing implements Runnable {
       e.printStackTrace();
     }
   }
-
+/**
+ * Creates a data to store file path name and name of file
+ * 
+ * @param fileList
+ * @throws Exception
+ */
   void consume(FileWithData fileList) throws Exception {
     String imagePath = fileList.getPathName();
     String imagePath2 = folderName + "\\filtered" + fileList.getFileName();
